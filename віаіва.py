@@ -89,7 +89,7 @@ finish = False
 # Основний цикл гри:
 run = True  # прапорець скидається кнопкою закриття вікна
 
-
+bx = 0
 while run:
     # подія натискання на кнопку Закрити
     for e in event.get():
@@ -100,7 +100,8 @@ while run:
     # сама гра: дії спрайтів, перевірка правил гри, перемальовка
     if not finish:
         # оновлюємо фон
-        window.blit(background, (0, 0))
+        window.blit(background, (bx, 0))
+        window.blit(background, (bx + 700, 0))
 
         # рухи спрайтів
         car1.update()
@@ -111,6 +112,9 @@ while run:
         car1.reset()
         car2.draw(window)
         
+        bx -= 1 
+        if bx == -700:
+            bx = 0
 
         if sprite.spritecollide(car1, car2, False):
             sprite.spritecollide(car2, car1, True)
